@@ -1,0 +1,27 @@
+{
+  "name": "projet5",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "...",
+    "build": "webpack",
+    "start": "webpack serve"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mohammedfetouah/mohammedfetouah_5_05082021.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mohammedfetouah/mohammedfetouah_5_05082021/issues"
+  },
+  "homepage": "https://github.com/mohammedfetouah/mohammedfetouah_5_05082021#readme",
+  "devDependencies": {
+    "webpack": "^5.48.0",
+    "webpack-cli": "^4.7.2",
+    "webpack-dev-server": "^3.11.2",
+    "webpack-serve": "^4.0.0"
+  }
+}
