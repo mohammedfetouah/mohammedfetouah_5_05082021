@@ -17,14 +17,18 @@ class Produit {
                                     '<span>' + this.name + '</span>' +
                                 '</div>' +
                                 ' <div class="produit-price"> ' + 
-                                    ' <span> ' + this.price + '</span>' +
+                                    ' <span> ' + this.price/100 + '€</span>' +
                                 '</div>' + 
                             '</div>' +
                         '</a>';
 
     }
     getHtmlProduit() {
-        return          '<a href="produit.html?id=' + this._id +  '" class="produits"> ' +
+        var colorHtml = '';
+        for (let color of this.colors) {
+            colorHtml += '<option value="' + color + '">' + color +'</option>';
+        }
+        return          '<div class="produit"> ' +
                             '<div>' +
                                 '<img class="produit-image"' + ' src="'  + this.imageUrl + '" alt="nounours">' +                             
                             '</div>' +
@@ -33,16 +37,14 @@ class Produit {
                                     '<span>' + this.name + '</span>' +
                                 '</div>' +
                                 ' <div class="produit-price"> ' + 
-                                    ' <span> ' + this.price + '</span>' +
-                                '</div>' + 
-                                '<div class="produit-name">' +
-                                    '<span>' + this.colors + '</span>' +
+                                '    <span> ' + this.description + '</span>' +
                                 '</div>' +
                                 ' <div class="produit-price"> ' + 
-                                    ' <span> ' + this.description + '</span>' +
-                                '</div>' +
-                            '</div>' +
-                        '</a>';
+                                    ' <span> ' + this.price/100 + '€</span>' +
+                                '</div>' + 
+                                '<select name="colors">' + colorHtml + '</select>' + 
+                            '<button id="addPanier">  ajouter au panier </button>' +
+                        '</div';
     }  
 }
 
@@ -59,7 +61,6 @@ if(window.location.pathname == '/') {
             var produit = new Produit(produitData._id, produitData.price, produitData.name, produitData.imageUrl, produitData.description, produitData.colors);
             var currentDiv = document.getElementById('container');
             currentDiv.innerHTML += produit.getHtml();
-            console.log(produit.getHtml());
         }
     })
     .catch(function(err) {
@@ -75,62 +76,34 @@ if(window.location.pathname == "/produit.html") {
     .then(function(res) {
         if (res.ok) {
             return res.json();
+        } else {
+            window.location.href = "http://localhost:8080/";
         }
-        })
-        .then(function(data) { 
-            var produit = new Produit(data._id, data.price, data.name, data.imageUrl, data.description, data.colors);
-            var currentDiv = document.getElementById('containerProduit');
-            currentDiv.innerHTML += produit.getHtmlProduit();
-            console.log(produit.getHtmlProduit());
-        })
-        .catch(function(err) {
-            return 'http://localhost:3000/api/teddies/';
+    })
+    .then(function(data) { 
+        var produit = new Produit(data._id, data.price, data.name, data.imageUrl, data.description, data.colors);
+        var currentDiv = document.getElementById('containerProduit');
+        currentDiv.innerHTML += produit.getHtmlProduit();
+        var addPanier = document.getElementById('addPanier');
+        addPanier.addEventListener('click', function() {        
+            addPanier.innerHTML = "C'est ajouté a votre panier !";
+            panier.addProduct(data._id,data.price);
         });
+    })
+    .catch(function(err) {
+    });
+}
+
+if(window.location.pathname == "/panier.html") {
+    var clearPanier = document.getElementById('clearPanier');
+    clearPanier.addEventListener('click', function(){
+        localStorage.clear();
+        window.location.href = "http://localhost:8080/panier.html";
+    });
+
 }
 
 
-
-
-
-
-
-
-
-
-
-// fetch('http://localhost:3000/api/teddies')
-//     .then(function(response){
-//     return response.json();
-// }).then(function(data){
-//     console.log(data)
-// });
-
-
-
-        // // création de variable qui récupere l'element du dom ('contenu') 
-        // var contenuElement = document.getElementById('content');
-        // // création de variable qui récupere l'element du dom ('contenu')
-         
-
-
-
-        // //  création de boucle for of
-
-        // }
-        // //  création de boucle for of
-
-
-        // var newA = document.createElement("a");
-        // var newDivImg = document.createElement('div');
-        // var newImg = document.createElement("img");
-        // var newDivDescription = document.createElement("div");
-        
-        // newImg.setAttribute("src",this.imageUrl);
-        // newImg.setAttribute("alt","image de " + this.name);
-        // newA.setAttribute('href', 'produit.html?id= ' + this._id);
-        // newDivImg.appendChild(newImg);
-        // newA.appendChild(newDivImg);
-        // return newA;
 
 
 
