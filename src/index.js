@@ -94,12 +94,13 @@ if(window.location.pathname == "/produit.html") {
     });
 }
 
-if(window.location.pathname == "/panier.html") {
-    var clearPanier = document.getElementById('clearPanier');
-    clearPanier.addEventListener('click', function(){
-        localStorage.clear();
-        window.location.href = "http://localhost:8080/panier.html";
-    });
+
+
+if(window.location.pathname == "/commande.html") {
+    document.getElementById('cordonnees'.).addEventListener('submit', function() {
+        alert
+    })
+
 
 }
 
