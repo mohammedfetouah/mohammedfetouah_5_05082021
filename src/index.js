@@ -21,8 +21,8 @@ class Produit {
                                 '</div>' + 
                             '</div>' +
                         '</a>';
-
     }
+
     getHtmlProduit() {
         var colorHtml = '';
         for (let color of this.colors) {
@@ -30,7 +30,7 @@ class Produit {
         }
         return          '<div class="produit"> ' +
                             '<div>' +
-                                '<img class="produit-image"' + ' src="'  + this.imageUrl + '" alt="nounours">' +                             
+                                '<img class="produit-image" src="'  + this.imageUrl + '" alt="nounours">' +                             
                             '</div>' +
                             '<div class="produit-description">' +
                                 '<div class="produit-name">' +
@@ -44,17 +44,46 @@ class Produit {
                                 '</div>' + 
                                 '<select name="colors">' + colorHtml + '</select>' + 
                             '<button id="addPanier">  ajouter au panier </button>' +
-                        '</div';
+                        '</div>';
     }  
 }
+
+class Panier {
+    addProduct(productId, productPrice) {
+        var panierLocal = localStorage.getItem('panier');
+        panierLocal = ['']
+        if(panierLocal == null) {
+            var produits = JSON.parse(panierLocal);
+            produits.push(produitId, productPrice);
+        } else {
+
+        }
+        localStorage.setItem('panierTotal',panierTotal);
+
+    }
+
+
+
+    getProduits() {
+        var panierLocal = localStorage.getItem('panier');
+        return JSON.parse(panierLocal);
+    }
+    getTotal() {
+        return localStorage.getItem('panierTotal');
+    }
+
+}
+
+
+
 
 
 if(window.location.pathname == '/') {
     fetch('http://localhost:3000/api/teddies')
     .then(function(res) {
-    if (res.ok) {
-        return res.json();
-    }
+        if (res.ok) {
+            return res.json();
+        }
     })
     .then(function(data) {
         for(produitData of data) {
@@ -68,11 +97,19 @@ if(window.location.pathname == '/') {
 }
 
 
+
+
+
+
+
+
+
+// PAGE PRODUIT
 if(window.location.pathname == "/produit.html") {
     var str = window.location.href;
     var url = new URL(str);
-    var productId = url.searchParams.get("id");
-    fetch('http://localhost:3000/api/teddies/' + productId )
+    var productId = url.searchParams.get("id")
+    fetch('http://localhost:3000/api/teddies/' + productId)
     .then(function(res) {
         if (res.ok) {
             return res.json();
@@ -83,26 +120,25 @@ if(window.location.pathname == "/produit.html") {
     .then(function(data) { 
         var produit = new Produit(data._id, data.price, data.name, data.imageUrl, data.description, data.colors);
         var currentDiv = document.getElementById('containerProduit');
-        currentDiv.innerHTML += produit.getHtmlProduit();
-        var addPanier = document.getElementById('addPanier');
-        addPanier.addEventListener('click', function() {        
-            addPanier.innerHTML = "C'est ajouté a votre panier !";
-            panier.addProduct(data._id,data.price);
-        });
+        currentDiv.innerHTML += (produit.getHtmlProduit());
+
+        
+        // var addPanier = document.getElementById('addPanier');
+        // addPanier.addEventListener('click', function() {        
+        //     addPanier.innerHTML = "C'est ajouté a votre panier !";
+
+        // });
     })
     .catch(function(err) {
+
     });
 }
 
 
 
-if(window.location.pathname == "/commande.html") {
-    document.getElementById('cordonnees'.).addEventListener('submit', function() {
-        alert
-    })
 
 
-}
+
 
 
 
