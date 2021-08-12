@@ -51,19 +51,23 @@ class Produit {
 class Panier {
     addProduct(productId, productPrice) {
         var panierLocal = localStorage.getItem('panier');
-        panierLocal = ['']
-        if(panierLocal == null) {
-            var produits = JSON.parse(panierLocal);
-            produits.push(produitId, productPrice);
-        } else {
-
+        if(panierLocal) {
+            panierLocal = JSON.parse(panierLocal);
+        }else {
+            panierLocal = [];
         }
-        localStorage.setItem('panierTotal',panierTotal);
+        panierLocal.push(productId);
+        localStorage.setItem('panier', JSON.stringify(panierLocal));
 
+        var panierTotal = localStorage.getItem('panierTotal');
+        if(panierTotal) {
+            panierTotal = parseInt(panierTotal);
+            panierTotal += parseInt(productPrice);
+            localStorage.setItem('panierTotal', panierTotal);
+        } else {
+            localStorage.setItem('panierTotal', productPrice);
+        }
     }
-
-
-
     getProduits() {
         var panierLocal = localStorage.getItem('panier');
         return JSON.parse(panierLocal);
@@ -75,8 +79,7 @@ class Panier {
 }
 
 
-
-
+var panier = new Panier();
 
 if(window.location.pathname == '/') {
     fetch('http://localhost:3000/api/teddies')
@@ -97,14 +100,8 @@ if(window.location.pathname == '/') {
 }
 
 
-
-
-
-
-
-
-
 // PAGE PRODUIT
+
 if(window.location.pathname == "/produit.html") {
     var str = window.location.href;
     var url = new URL(str);
@@ -121,13 +118,10 @@ if(window.location.pathname == "/produit.html") {
         var produit = new Produit(data._id, data.price, data.name, data.imageUrl, data.description, data.colors);
         var currentDiv = document.getElementById('containerProduit');
         currentDiv.innerHTML += (produit.getHtmlProduit());
-
-        
-        // var addPanier = document.getElementById('addPanier');
-        // addPanier.addEventListener('click', function() {        
-        //     addPanier.innerHTML = "C'est ajouté a votre panier !";
-
-        // });
+        var addPanier = document.getElementById('addPanier');
+        addPanier.addEventListener('click', function (e) {
+         panier.addProduct(data._id, data.price);
+        });
     })
     .catch(function(err) {
 
@@ -139,6 +133,35 @@ if(window.location.pathname == "/produit.html") {
 
 
 
+
+if(window.location.pathname == "/panier.html") {
+    var clearPanier = document.getElementById('clearPanier');
+    clearPanier.addEventListener('click', function(){
+        localStorage.clear();
+        window.location.href = "http://localhost:8080/panier.html";
+    });
+    if (panier.getProduits()) {
+        document.getElementById('total').innerHTML += '<div><b>Total panier : </b>' + (panier.getTotal()/100) + '€</div>';
+        console.log(panier.getProduits());
+        for(productId of panier.getProduits()) {
+            // document.querySelector('[data-id="5beaacd41c9d440000a57d97"] .qty').innerHTML = parseInt(document.querySelector('[data-id="5beaacd41c9d440000a57d97"] .qty').innerHTML) + 1;
+            // Vérifier si une div avec data-id du produit nexiste pas si elle existe pas tu fais appel a la méthode fetch
+        }
+        // <div class="produit" data-id="5beaacd41c9d440000a57d97">
+        // <span class="name">Produit bla</span>
+        // <span class="qty">1</span>
+        // </div>
+    }
+    document.getElementById('cordonnees').addEventListener('submit', function(event) {
+        event.preventDefault();
+        alert('ok');
+    })
+}
+
+if(window.location.pathname == "/commande.html") {
+    var products = [];
+    
+}
 
 
 

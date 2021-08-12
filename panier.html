@@ -13,38 +13,39 @@
         </ul>
     </header>
     <main>
-        <fieldset id="produits">
+        <fieldset>
             <legend>Votre panier</legend>
+            <div id="produits">
+            </div>
         </fieldset>
         <div id="total">      
         </div>
-        <form action="">
-            
+        <form action="" id="cordonnees">
+            <fieldset>
+                <legend>Vos cordonnées</legend>
+                <label for="nom">Nom</label>
+                <input type="text" name="nom" />
+         
+                <label for="prenom">Prénom</label>
+                <input type="text" name="prenom"/>
+          
+                <label for="email">e-mail </label>
+                <input type="email" name="email"/>
+    
+                <label for="postal">Code postal</label>
+                <input type="text" name="postal" />
+    
+                <label for="ville">Ville</label>
+                <input type="text" name="ville" />
+    
+                <label for="adresse">Adresse</label>
+                <input type="text" name="adresse"/>
+    
+                <input type="submit" name="Passer la commande" id="confirm-command" value="passer la commande" />
+                <button id="clearPanier">vider le panier</button>
+            </fieldset>
         </form>
-        <fieldset id="cordonnees">
-            <legend>Vos cordonnées</legend>
-            <label for="nom">Nom</label>
-            <input type="text" name="nom" />
-     
-            <label for="prenom">Prénom</label>
-            <input type="text" name="prenom"/>
-      
-            <label for="email">e-mail </label>
-            <input type="email" name="email"/>
-
-            <label for="postal">Code postal</label>
-            <input type="text" name="postal" />
-
-            <label for="ville">Ville</label>
-            <input type="text" name="ville" />
-
-            <label for="adresse">Adresse</label>
-            <input type="text" name="adresse"/>
-
-            <input type="submit" name="Passer la commande" id="confirm-command" value="passer la commande" />
-            <button id="clearPanier">vider le panier</button>
-        </fieldset>
-
+        
     </main>
     </div>
     <script type="text/javascript" src="/app.bundle.js"></script>
