@@ -46,6 +46,9 @@ class Produit {
                             '<button id="addPanier">  ajouter au panier </button>' +
                         '</div>';
     }  
+    getHtmlPanier() {
+
+    }
 }
 
 class Panier {
@@ -135,22 +138,50 @@ if(window.location.pathname == "/produit.html") {
 
 
 if(window.location.pathname == "/panier.html") {
+    
     var clearPanier = document.getElementById('clearPanier');
     clearPanier.addEventListener('click', function(){
         localStorage.clear();
         window.location.href = "http://localhost:8080/panier.html";
     });
     if (panier.getProduits()) {
+        
         document.getElementById('total').innerHTML += '<div><b>Total panier : </b>' + (panier.getTotal()/100) + '€</div>';
-        console.log(panier.getProduits());
+        var productQty = {};
+        var productIds = [];
         for(productId of panier.getProduits()) {
-            // document.querySelector('[data-id="5beaacd41c9d440000a57d97"] .qty').innerHTML = parseInt(document.querySelector('[data-id="5beaacd41c9d440000a57d97"] .qty').innerHTML) + 1;
-            // Vérifier si une div avec data-id du produit nexiste pas si elle existe pas tu fais appel a la méthode fetch
+            if (productQty[productId]) {
+                productQty[productId] += 1;
+            } else {
+                productQty[productId] = 1;
+                productIds.push(productId);
+            }
         }
-        // <div class="produit" data-id="5beaacd41c9d440000a57d97">
-        // <span class="name">Produit bla</span>
-        // <span class="qty">1</span>
-        // </div>
+        for(productId of productIds) {
+  
+            fetch('http://localhost:3000/api/teddies/' + productId)
+            .then(function(res) {
+                if (res.ok) {
+                    return res.json();
+                } else {
+                    window.location.href = "http://localhost:8080/";
+                }
+            })
+            .then(function(data) {
+                var currentDiv = document.getElementById('produits');
+                currentDiv.innerHTML += '<div class="produit">' +
+                                            '<span class="name">' + data.name + '</span>'  +                
+                                            '<span class="qty"> '+ productQty[data._id] +' </span>' +  
+                                        '</div>';
+    
+            })
+            .catch(function(err) {
+            });
+
+            
+        }
+
+
     }
     document.getElementById('cordonnees').addEventListener('submit', function(event) {
         event.preventDefault();
@@ -162,8 +193,5 @@ if(window.location.pathname == "/commande.html") {
     var products = [];
     
 }
-
-
-
 
 
