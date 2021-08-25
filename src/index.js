@@ -134,16 +134,56 @@ class Commande {
         formulaire.ville = document.querySelector('#cordonnees input[name="ville"] ').value
         formulaire.adresse = document.querySelector('#cordonnees input[name="adresse"]' ).value
 
-        // Vérifier le code postal avec une regex chercher sur google
-        // Si le code postal correspond pas on retourne une alerte avec le message
-        if (formulaire.postal == "a") {
-            alert('Le code postal est faux !');
+
+        
+        if (/^[A-Za-z]{2,20}$/.test(formulaire.nom, formulaire.prenom ) == false) {
+            alert('erreur prenon ou nom')
             return;
         }
 
 
+        const regexEmail = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        if (regexEmail.test(formulaire.email) == false) {
+            alert('erreur email')
+            return;
+        }
+
+
+        const regexPostal = /^(([0-8][0-9])|(9[0-5])|(2[ab]))[0-9]{3}$/;
+        if (regexPostal.test(formulaire.postal) == false) {
+            alert('erreur postal')
+            return;
+        }
+
+        const regexVille = /^([a-zA-Z\u0080-\u024F]+(?:. |-| |'))*[a-zA-Z\u0080-\u024F]*$/;
+        if (regexVille.test(formulaire.ville) == false) {
+            alert('erreur ville')
+            return;
+        }
+        const regexAdresse = /^[a-zA-Z0-9\s,.'-]{3,}$/;
+        if (regexAdresse.test(formulaire.ville) == false) {
+            alert('erreur adresse')
+            return;
+        }
+
+
+
+
         
         
+
+        // Ici le formulaire est OK
+        // Ajouter un numeroCommande dans le localStorage
+        // Le récupérer grace à l'api 
+
+        // contact: {
+        //  firstName: string,
+        //  lastName: string,
+        //  address: string,
+        //  city: string,
+        //     *   email: string
+        //     * }
+        //     * products: ['tsgfysiqf','sugfhdsgdsg','ghuihbkjjn']
 
 
         var panierCommande = localStorage.getItem('panier');
@@ -158,7 +198,7 @@ class Commande {
 
 
 
-        window.location.href = "http://localhost:8080/commande.html";
+        // window.location.href = "http://localhost:8080/commande.html";
     }
     getCommande() {
         var commande = {
