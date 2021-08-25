@@ -76,6 +76,19 @@ class Panier {
         
         localStorage.setItem('panier', JSON.stringify(panierLocal));
     }
+    setProductQty(productKey, qty) {
+        var panierLocal = localStorage.getItem('panier');
+        panierLocal = JSON.parse(panierLocal);
+        panierLocal[productKey].qty = qty;
+    
+        localStorage.setItem('panier', JSON.stringify(panierLocal))
+
+
+
+
+
+
+    }
     getProduits() {
         var panierLocal = localStorage.getItem('panier');
         return JSON.parse(panierLocal);
@@ -121,15 +134,23 @@ class Commande {
         formulaire.ville = document.querySelector('#cordonnees input[name="ville"] ').value
         formulaire.adresse = document.querySelector('#cordonnees input[name="adresse"]' ).value
 
+        // Vérifier le code postal avec une regex chercher sur google
+        // Si le code postal correspond pas on retourne une alerte avec le message
+        if (formulaire.postal == "a") {
+            alert('Le code postal est faux !');
+            return;
+        }
 
-        localStorage.setItem('formulaire', JSON.stringify(formulaire));
 
+        
+        
 
 
         var panierCommande = localStorage.getItem('panier');
-        var totalCommande = localStorage.getItem('panierTotal');
-        localStorage.setItem('panierCommande', panierCommande)
-        localStorage.setItem('totalCommande', totalCommande)
+        localStorage.setItem('panierCommande', panierCommande);
+        localStorage.setItem('totalCommande', panier.getTotal());
+        localStorage.setItem('formulaire', JSON.stringify(formulaire));
+
         localStorage.removeItem('panier');
         localStorage.removeItem('panierTotal');
 
@@ -137,25 +158,16 @@ class Commande {
 
 
 
-
-
-
+        window.location.href = "http://localhost:8080/commande.html";
     }
     getCommande() {
-        console.log(localStorage.getItem('formulaire').nom);
-        var commandes = {
+        var commande = {
             panier : JSON.parse(localStorage.getItem('panierCommande')),
             formulaire : JSON.parse(localStorage.getItem('formulaire')),
             total : JSON.parse(localStorage.getItem('totalCommande')),
         };
-
-
-
-
         
-        return commandes;
-
-
+        return commande;
         
     };
 
@@ -226,12 +238,6 @@ if(window.location.pathname == "/produit.html") {
         addPanier.addEventListener('click', function (e) {
             var color = document.getElementById('addColors').value;
             panier.addProduct(data._id,data.name, data.price, color);
-
-
-
-
-            
-
            
         });
     })
@@ -239,25 +245,43 @@ if(window.location.pathname == "/produit.html") {
 
     });
 }
-
-
 if(window.location.pathname == "/panier.html") {
-    
     var clearPanier = document.getElementById('clearPanier');
     clearPanier.addEventListener('click', function(){
         localStorage.clear();
         window.location.href = "http://localhost:8080/panier.html";
     });
+    document.getElementById('total').innerHTML = '<div><b>Total:</b>' +  panier.getTotal()/100  + '€</div>' ;
+    var produits = document.getElementById('produits');
     for (let [key, value] of Object.entries(panier.getProduits())) {
-        // Ajouté ligne dans le panier avec  Nom (couleur) selectQty et prix
-        // ajouter eventListener change select 
+        
+        produits.innerHTML +=           '<div class="produit">' +
+                                            '<span>' + value.name + (value.color) + '</span>' + 
+                                            panier.getHtmlQuantity(key,value.qty) +
+                                            '<span>' + value.price + '€</span>' +
+                                        '</div>';
+                                        
+                                        
+                                    
+    }
+    for (let [key, value] of Object.entries(panier.getProduits())) {
+
+        
+        
+        document.getElementById(key).addEventListener('change', function (event) {
+            panier.setProductQty(key, document.getElementById(key).value);
+
+
+            document.getElementById('total').innerHTML = '<div><b>Total:</b>' +  panier.getTotal()/100  + '€</div>' ;
+             
+        });
+
     }
 
-    var total = document.getElementById('total').innerHTML = '<div><b>Total:</b>' +  panier.getTotal()/100  + '€</div>' ; 
+    
     document.getElementById('cordonnees').addEventListener('submit', function(event) {
         event.preventDefault();
-        commande.addCommande()
-        window.location.href = "http://localhost:8080/commande.html";
+        commande.addCommande();
     })
 
 }
@@ -268,13 +292,11 @@ if(window.location.pathname == "/panier.html") {
 
 
 
-// if(window.location.pathname == "/commande.html") {
-//     var currentDiv = document.getElementById('commande');
-//     currentDiv.innerHTML += '<h1>' + commande.getCommande().formulaire.nom + '</h1>';
-//     console.log(commande.getCommande());
-
-
-// }
+if(window.location.pathname == "/commande.html") {
+    var currentDiv = document.getElementById('commande');
+    //currentDiv.innerHTML += '<h1>' + commande.getCommande().formulaire.nom + '</h1>';
+    console.log(commande.getCommande());
+}
 
 
 
