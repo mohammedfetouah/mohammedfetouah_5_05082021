@@ -137,7 +137,7 @@ class Commande {
 
         
         if (/^[A-Za-z]{2,20}$/.test(formulaire.nom, formulaire.prenom ) == false) {
-            alert('erreur prenon ou nom')
+            alert('erreur prénon ou nom')
             return;
         }
 
@@ -161,50 +161,56 @@ class Commande {
             return;
         }
         const regexAdresse = /^[a-zA-Z0-9\s,.'-]{3,}$/;
-        if (regexAdresse.test(formulaire.ville) == false) {
+        if (regexAdresse.test(formulaire.adresse) == false) {
             alert('erreur adresse')
             return;
         }
 
+        var products = [];
+        for (let [key, value] of Object.entries(panier.getProduits()))  {
+            products.push(key.split('_')[0]);
+        }
 
-
-
-        
-        
-
-        // Ici le formulaire est OK
-        // Ajouter un numeroCommande dans le localStorage
-        // Le récupérer grace à l'api 
-
-        // contact: {
-        //  firstName: string,
-        //  lastName: string,
-        //  address: string,
-        //  city: string,
-        //     *   email: string
-        //     * }
-        //     * products: ['tsgfysiqf','sugfhdsgdsg','ghuihbkjjn']
-
-
-        var panierCommande = localStorage.getItem('panier');
-        localStorage.setItem('panierCommande', panierCommande);
-        localStorage.setItem('totalCommande', panier.getTotal());
-        localStorage.setItem('formulaire', JSON.stringify(formulaire));
-
-        localStorage.removeItem('panier');
-        localStorage.removeItem('panierTotal');
-
-
-
-
-
-        // window.location.href = "http://localhost:8080/commande.html";
+        var jsonBody = {
+            contact: {
+                firstName: formulaire.prenom,
+                lastName: formulaire.nom,
+                address: formulaire.adresse,
+                city: formulaire.ville,
+                email: formulaire.email,
+            },
+            products: products,
+        };
+        fetch('http://localhost:3000/api/teddies/order', {
+            method: 'POST',
+            headers: { 
+                'Accept': 'application/json', 
+                'Content-Type': 'application/json' 
+            },
+            body: JSON.stringify(jsonBody)
+        }).then(function(res) {
+            if (res.ok) {
+                return res.json();
+            }
+        })
+        .then(function(data)  {
+            var orderId = data.orderId;
+            localStorage.setItem('orderId', orderId);
+            var panierCommande = localStorage.getItem('panier');
+            localStorage.setItem('panierCommande', panierCommande);
+            localStorage.setItem('totalCommande', panier.getTotal());
+            localStorage.setItem('formulaire', JSON.stringify(formulaire));
+            localStorage.removeItem('panier');
+            localStorage.removeItem('panierTotal');
+            window.location.href = "http://localhost:8080/commande.html";
+        });
     }
     getCommande() {
         var commande = {
             panier : JSON.parse(localStorage.getItem('panierCommande')),
             formulaire : JSON.parse(localStorage.getItem('formulaire')),
             total : JSON.parse(localStorage.getItem('totalCommande')),
+            orderId: localStorage.getItem('orderId')
         };
         
         return commande;
@@ -296,7 +302,7 @@ if(window.location.pathname == "/panier.html") {
     for (let [key, value] of Object.entries(panier.getProduits())) {
         
         produits.innerHTML +=           '<div class="produit">' +
-                                            '<span>' + value.name + (value.color) + '</span>' + 
+                                            '<span>' + value.name + '(' + value.color + ')</span>' + 
                                             panier.getHtmlQuantity(key,value.qty) +
                                             '<span>' + value.price + '€</span>' +
                                         '</div>';
