@@ -1,3 +1,5 @@
+//                         DEBUT FUNCTION PRODUIT                        //   
+
 class Produit {
     constructor(_id, price, name, imageUrl, description, colors) {
         this._id = _id;
@@ -22,13 +24,11 @@ class Produit {
                             '</div>' +
                         '</a>';
     }
-
     getHtmlProduit() {
         var colorHtml = '';
         for (let color of this.colors) {
             colorHtml += '<option value="' + color + '">' + color +'</option>';
         }
-
         return          '<div class="produit"> ' +
                             '<div>' +
                                 '<img class="produit-image" src="'  + this.imageUrl + '" alt="nounours">' +                             
@@ -48,13 +48,14 @@ class Produit {
                             '<button id="addPanier">  ajouter au panier </button>' +
                         '</div>';
     }  
-    
 }
-// 5beaa8bf1c9d440000a57d94_white: {
-//     name: 'Arnold',
-//     qty: 1,
-//     price: 5000
-// },
+//                         FIN FUNCTION PRODUIT                         //   
+
+
+
+
+
+//                        DEBUT FUNCTION PANIER                          //   
 class Panier {
     addProduct(productId, productName, productPrice, productColor) {
         var productColorKey = productColor.toLowerCase().replace(' ', '_');
@@ -80,14 +81,7 @@ class Panier {
         var panierLocal = localStorage.getItem('panier');
         panierLocal = JSON.parse(panierLocal);
         panierLocal[productKey].qty = qty;
-    
         localStorage.setItem('panier', JSON.stringify(panierLocal))
-
-
-
-
-
-
     }
     getProduits() {
         var panierLocal = localStorage.getItem('panier');
@@ -111,22 +105,20 @@ class Panier {
             } else {
                 html +=  '<option value="'+ i + '">' + i + '</option>';
             }
-            
         }
         html += '</select>';
-
         return html;
     }
-
 }
-var panier = new Panier();
-var commande = new Commande();
+//                         FIN FUNCTION PANIER                          // 
 
+
+
+
+//                       DEBUT FUNCTION COMMANDE                         //
 class Commande {
      addCommande() {
-
         var formulaire = {};
-
         formulaire.nom = document.querySelector('#cordonnees input[name="nom"]').value
         formulaire.prenom = document.querySelector('#cordonnees input[name="prenom"]').value
         formulaire.email = document.querySelector('#cordonnees input[name="email"]').value
@@ -134,21 +126,15 @@ class Commande {
         formulaire.ville = document.querySelector('#cordonnees input[name="ville"] ').value
         formulaire.adresse = document.querySelector('#cordonnees input[name="adresse"]' ).value
 
-
-        
         if (/^[A-Za-z]{2,20}$/.test(formulaire.nom, formulaire.prenom ) == false) {
             alert('erreur prénon ou nom')
             return;
         }
-
-
         const regexEmail = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
         if (regexEmail.test(formulaire.email) == false) {
             alert('erreur email')
             return;
         }
-
-
         const regexPostal = /^(([0-8][0-9])|(9[0-5])|(2[ab]))[0-9]{3}$/;
         if (regexPostal.test(formulaire.postal) == false) {
             alert('erreur postal')
@@ -203,26 +189,19 @@ class Commande {
             localStorage.removeItem('panier');
             localStorage.removeItem('panierTotal');
             window.location.href = "http://localhost:8080/commande.html";
-        });
+        });       
     }
     getCommande() {
         var commande = {
             panier : JSON.parse(localStorage.getItem('panierCommande')),
             formulaire : JSON.parse(localStorage.getItem('formulaire')),
             total : JSON.parse(localStorage.getItem('totalCommande')),
-            orderId: localStorage.getItem('orderId')
+            orderId: localStorage.getItem('orderId')  
         };
-        
         return commande;
-        
     };
-
-        
-    
-
-    
-
 }
+//                   FIN FUNCTION COMMANDE                      // 
 
 
 
@@ -234,11 +213,16 @@ class Commande {
 
 
 
+
+
+//                   DEBUT PAGE INDEX                      // 
 if(window.location.pathname == '/') {
     fetch('http://localhost:3000/api/teddies')
     .then(function(res) {
         if (res.ok) {
             return res.json();
+        } else {
+            alert('orinoco momentanément indisponible :(');
         }
     })
     .then(function(data) {
@@ -249,12 +233,16 @@ if(window.location.pathname == '/') {
         }
     })
     .catch(function(err) {
+        alert('orinoco momentanément indisponible :(');
     });
 }
+//                   FIN PAGE INDEX                      // 
 
 
-// PAGE PRODUIT
 
+
+
+//                   DEBUT PAGE PRODUIT                     // 
 if(window.location.pathname == "/produit.html") {
     var str = window.location.href;
     var url = new URL(str);
@@ -268,29 +256,29 @@ if(window.location.pathname == "/produit.html") {
         }
     })
     .then(function(data) { 
-
-
         var produit = new Produit(data._id, data.price, data.name, data.imageUrl, data.description, data.colors);
-
         var currentDiv = document.getElementById('containerProduit');
         currentDiv.innerHTML += (produit.getHtmlProduit());
-
-
-
         var addPanier = document.getElementById('addPanier');
-
-
-
         addPanier.addEventListener('click', function (e) {
             var color = document.getElementById('addColors').value;
             panier.addProduct(data._id,data.name, data.price, color);
-           
         });
     })
     .catch(function(err) {
-
+        alert('orinoco momentanément indisponible :(')
     });
 }
+//                   FIN PAGE PRODUIT                     //
+
+
+
+
+
+
+
+//                   DEBUT PAGE PANIER                    // 
+var panier = new Panier();
 if(window.location.pathname == "/panier.html") {
     var clearPanier = document.getElementById('clearPanier');
     clearPanier.addEventListener('click', function(){
@@ -299,38 +287,27 @@ if(window.location.pathname == "/panier.html") {
     });
     document.getElementById('total').innerHTML = '<div><b>Total:</b>' +  panier.getTotal()/100  + '€</div>' ;
     var produits = document.getElementById('produits');
-    for (let [key, value] of Object.entries(panier.getProduits())) {
-        
+    for (let [key, value] of Object.entries(panier.getProduits())) { 
         produits.innerHTML +=           '<div class="produit">' +
                                             '<span>' + value.name + '(' + value.color + ')</span>' + 
                                             panier.getHtmlQuantity(key,value.qty) +
                                             '<span>' + value.price + '€</span>' +
-                                        '</div>';
-                                        
-                                        
-                                    
+                                        '</div>';                                    
     }
-    for (let [key, value] of Object.entries(panier.getProduits())) {
-
-        
-        
+    for (let [key, value] of Object.entries(panier.getProduits())) {   
         document.getElementById(key).addEventListener('change', function (event) {
             panier.setProductQty(key, document.getElementById(key).value);
-
-
-            document.getElementById('total').innerHTML = '<div><b>Total:</b>' +  panier.getTotal()/100  + '€</div>' ;
-             
+            document.getElementById('total').innerHTML = '<div><b>Total:</b>' +  panier.getTotal()/100  + '€</div>' ;        
         });
-
     }
-
-    
     document.getElementById('cordonnees').addEventListener('submit', function(event) {
         event.preventDefault();
         commande.addCommande();
     })
-
+} else {
+    alert('orinoco momentanément indisponible :(')
 }
+//                  FIN PAGE PANIER                    // 
 
 
 
@@ -338,11 +315,90 @@ if(window.location.pathname == "/panier.html") {
 
 
 
+
+//                   DEBUT PAGE COMMANDE                    // 
+var commande = new Commande();
 if(window.location.pathname == "/commande.html") {
-    var currentDiv = document.getElementById('commande');
-    //currentDiv.innerHTML += '<h1>' + commande.getCommande().formulaire.nom + '</h1>';
-    console.log(commande.getCommande());
+    var currentDiv = document.getElementById('commandes');
+    var produitHtmlName ='';
+    var produitHtmlPrice ='';
+    var produitHtmlQty ='';
+    for (let [key, value] of Object.entries(commande.getCommande().panier)) {
+        produitHtmlName = value.name 
+        produitHtmlPrice = value.price
+        produitHtmlQty = value.qty
+        console.log(produitHtmlQty)
+    }
+    currentDiv.innerHTML +=     '<h2>'+
+                                    'nous vous remerciant pour votre commande'+
+                                '</h2>'+
+                                '<div class="commande">'+
+                                    '<h3>'+
+                                        'Détaille de la commandes'+
+                                    '</h3>'+
+                                    '<div class="detailleCommande">'+
+                                        '<div>'+
+                                            '<p>'+
+                                                'N° de commande :'+
+                                            '</p>'+
+                                            '<p>'+ 
+                                                commande.getCommande().orderId +
+                                            '</p>' +
+                                        '</div>' +
+                                        '<div>' +
+                                            '<p>' +
+                                                'Total de la commande :' +
+                                            '</p>' +
+                                            '<p>' +
+                                                commande.getCommande().total/100 + '€' +
+                                            '</p>' +
+                                        '</div>' +
+                                    '</div>' +
+                                '</div>' +
+                                '<div class="commande">' +
+                                    '<h3>' +
+                                        'Adresse de livraison' +
+                                    '</h3>' +
+                                    '<div class="adresseCommande">' +
+                                        '<div>' +
+                                            '<p>' +
+                                                'Nom :' +
+                                            '</p>' +
+                                            '<p>' +
+                                                commande.getCommande().formulaire.nom +
+                                            '</p>' +
+                                        '</div>' +
+                                        '<div>' +
+                                            '<p>' +
+                                                'Prénom :' +
+                                            '</p>' +
+                                            '<p>' +
+                                                commande.getCommande().formulaire.prenom +
+                                            '</p>' +
+                                        '</div>' +
+                                        '<div>' +
+                                            '<p>' +
+                                                'Adresse :' +
+                                            '</p>' +
+                                            '<p>' +
+                                                commande.getCommande().formulaire.adresse +
+                                            '</p>' +
+                                        '</div>' +
+                                        '<div>' +
+                                            '<p>' +
+                                                'Ville :' +
+                                            '</p>' +
+                                            '<p>' +
+                                                commande.getCommande().formulaire.ville + ', ' + commande.getCommande().formulaire.postal +
+                                            '</p>' +
+                                        '</div>' +
+                                    '</div>' +
+                                '</div>' ;
+} else {
+    alert('orinoco momentanément indisponible :(');
 }
+//                   FIN PAGE COMMANDE                     // 
+
 
 
 
