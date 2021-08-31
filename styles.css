@@ -1,6 +1,10 @@
-img.produit-image {
+body {
+    background-color: #f3e9f1;
+}
+/* img.produit-image {
     max-width: 200px;
 }
 img.produit-image {
     max-width: 200px;
-}
+} */
+
