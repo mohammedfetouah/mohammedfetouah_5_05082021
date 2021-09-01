@@ -54,7 +54,7 @@ class Produit {
                                         '</div>' + 
                                         '<select name="colors" id="addColors">' + colorHtml + '</select>' + 
                                     '</div>' +
-                                    '<button id="addPanier">  ajouter au panier </button>' +
+                                    '<button id="addPanier" class="btn btn-secondary">  ajouter au panier </button>' +
                                 '</div>' +
                             '</div>' +
                         '</div>';
@@ -301,9 +301,15 @@ if(window.location.pathname == "/panier.html") {
     var produits = document.getElementById('produits');
     for (let [key, value] of Object.entries(panier.getProduits())) { 
         produits.innerHTML +=           '<div class="produit">' +
-                                            '<span>' + value.name + '(' + value.color + ')</span>' + 
-                                            panier.getHtmlQuantity(key,value.qty) +
-                                            '<span>' + value.price + '€</span>' +
+                                            '<div class="produitName">' +
+                                                '<span>' + value.name + '(' + value.color + ')</span>' + 
+                                            '</div>' +
+                                            '<div class="produitQuantity">' +
+                                                panier.getHtmlQuantity(key,value.qty) +
+                                            '</div>' +
+                                            '<div class="produitPrice">' +
+                                                '<span>' + value.price/100 + '€</span>' +
+                                            '</div>' +
                                         '</div>';                                    
     }
     for (let [key, value] of Object.entries(panier.getProduits())) {   
@@ -346,10 +352,10 @@ if(window.location.pathname == "/commande.html") {
                                 '</h2>'+
                                 '<div class="commande">'+
                                     '<h3>'+
-                                        'Détaille de la commandes'+
+                                        'Détaille de la commande'+
                                     '</h3>'+
                                     '<div class="detailleCommande">'+
-                                        '<div>'+
+                                        '<div class="detailleNumeroCommande">'+
                                             '<p>'+
                                                 'N° de commande :'+
                                             '</p>'+
@@ -357,7 +363,7 @@ if(window.location.pathname == "/commande.html") {
                                                 commande.getCommande().orderId +
                                             '</p>' +
                                         '</div>' +
-                                        '<div>' +
+                                        '<div class="detailleTotalCommande">' +
                                             '<p>' +
                                                 'Total de la commande :' +
                                             '</p>' +
@@ -372,7 +378,7 @@ if(window.location.pathname == "/commande.html") {
                                         'Adresse de livraison' +
                                     '</h3>' +
                                     '<div class="adresseCommande">' +
-                                        '<div>' +
+                                        '<div class="commandeNom">' +
                                             '<p>' +
                                                 'Nom :' +
                                             '</p>' +
@@ -380,7 +386,7 @@ if(window.location.pathname == "/commande.html") {
                                                 commande.getCommande().formulaire.nom +
                                             '</p>' +
                                         '</div>' +
-                                        '<div>' +
+                                        '<div class="commandePrenom">' +
                                             '<p>' +
                                                 'Prénom :' +
                                             '</p>' +
@@ -388,7 +394,7 @@ if(window.location.pathname == "/commande.html") {
                                                 commande.getCommande().formulaire.prenom +
                                             '</p>' +
                                         '</div>' +
-                                        '<div>' +
+                                        '<div class="commandeAdresse">' +
                                             '<p>' +
                                                 'Adresse :' +
                                             '</p>' +
@@ -396,7 +402,7 @@ if(window.location.pathname == "/commande.html") {
                                                 commande.getCommande().formulaire.adresse +
                                             '</p>' +
                                         '</div>' +
-                                        '<div>' +
+                                        '<div class="commandeVille">' +
                                             '<p>' +
                                                 'Ville :' +
                                             '</p>' +

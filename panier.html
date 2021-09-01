@@ -9,47 +9,96 @@
     <title>Document</title>
 </head>
 <body>
-    <header>
-        <ul>
-            <li><a href="/">acceuil</a></li>
-        </ul>
-    </header>
-    <main>
-        <fieldset>
-            <legend>Votre panier</legend>
-            <div id="produits">
+    <div class="container-fluid">
+        <header >
+            <div class="row">
+                <nav class="col navbar navbar-expand-lg">
+                    <a class="navbar-brand" href="/">
+                        <img src="/img/logoOrinoco.webp" width="40" height="30" alt="Site logo">
+                        Orinoco
+                    </a>
+                    <button class="navbar-toggler navbar-light" type="button" data-toggle="collapse" data-target="#navbarContent">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div id="navbarContent" class="collapse navbar-collapse">
+                        <ul class="navbar-nav">
+                            <li class="nav-item">
+                                <a class="nav-link" href="/">Accueil</a>
+                            </li>
+                            <li class="nav-item active">
+                                <a class="nav-link" href="/panier.html">Panier</a>
+                            </li>
+                        </ul>
+                    </div>
+                </nav>
             </div>
-        </fieldset>
-        <div id="total">      
-        </div>
-        <button id="clearPanier">vider le panier</button>
-        <form method="GET" id="cordonnees">
-            <fieldset>
-                <legend>Vos cordonnées</legend>
-                <label for="nom">Nom</label>
-                <input type="text" name="nom" required="true" />
-         
-                <label for="prenom">Prénom</label>
-                <input type="text" name="prenom"/>
-          
-                <label for="email">e-mail </label>
-                <input type="email" name="email"/>
-    
-                <label for="postal">Code postal</label>
-                <input type="text" name="postal" >
-    
-                <label for="ville">Ville</label>
-                <input type="text" name="ville" />
-    
-                <label for="adresse">Adresse</label>
-                <input type="text" name="adresse"/>
-    
-                <input type="submit" name="Passer la commande" id="confirmeCommande" value="passer la commande" />
+            <div class="jumbotron">
+                <h1>Votre panier Orinoco !</h1>
+            </div>
+        </header>
+        <main class="row">
+            <fieldset class="col-12">
+                <legend>Votre panier</legend>
+                <div class="produits">
+                    <div id="produits">
+                    </div>
+                </div>
+                <div class="total">
+                    <div id="total">      
+                    </div>
+                </div>
+                <button id="clearPanier" class="btn btn-secondary">Vider le panier</button>
             </fieldset>
-        </form>
-        
-    </main>
+            <form method="GET" id="cordonnees" class="col-12">
+                <fieldset class="form-group">
+                    <legend>Vos cordonnées</legend>
+                    <div class="nom">
+                        <label for="nom">Nom</label>
+                        <input type="text" name="nom" required="true" />
+                    </div>
+                    <div class="prenom">
+                        <label for="prenom">Prénom</label>
+                        <input type="text" name="prenom"/>
+                    </div>
+                    <div class="email">
+                        <label for="email">e-mail </label>
+                        <input type="email" name="email"/>
+                    </div>
+                    <div class="postal">
+                        <label for="postal">Code postal</label>
+                        <input type="text" name="postal" >
+                    </div>
+                    <div class="ville">
+                        <label for="ville">Ville</label>
+                        <input type="text" name="ville" />
+                    </div>
+                    <div class="adresse">
+                        <label for="adresse">Adresse</label>
+                        <input type="text" name="adresse"/>
+                    </div>
+                    <input type="submit" name="Passer la commande" id="confirmeCommande" class="btn btn-secondary" value="passer la commande" />
+                </fieldset>
+            </form>
+        </main>
+    </div>
+    <div>
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col">
+              <ul class="list-inline text-center">
+                <li class="list-inline-item"><a href="#">À propos</a></li>
+                <li class="list-inline-item">&middot;</li>
+                <li class="list-inline-item"><a href="#">Contacte</a></li>
+                <li class="list-inline-item">&middot;</li>
+                <li class="list-inline-item"><a href="#">Conditions d'utilisations</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
     </div>
     <script type="text/javascript" src="/app.bundle.js"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 </body>
 </html>

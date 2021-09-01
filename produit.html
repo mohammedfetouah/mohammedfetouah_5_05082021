@@ -11,15 +11,50 @@
 <body>
     <div class="container-fluid">
         <header>
-            <ul>
-                <li><a href="/">acceuil</a></li>
-                <li><a href="/panier.html">mon panier</a></li>
-            </ul>
+            <div class="row">
+                <nav class="col navbar navbar-expand-lg">
+                    <a class="navbar-brand" href="/">
+                        <img src="/img/logoOrinoco.webp" width="40" height="30" alt="Site logo">
+                        Orinoco
+                    </a>
+                    <button class="navbar-toggler navbar-light" type="button" data-toggle="collapse" data-target="#navbarContent">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div id="navbarContent" class="collapse navbar-collapse">
+                        <ul class="navbar-nav">
+                            <li class="nav-item">
+                                <a class="nav-link" href="/">Accueil</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/panier.html">Panier</a>
+                            </li>
+                        </ul>
+                    </div>
+                </nav>
+            </div>
+            <div class="jumbotron">
+                <h1>Produit Orinoco !</h1>
+            </div>
         </header>
         <section id="containerProduit">
             <h2>Votre commande</h2>
     
         </section>
+    </div>
+    <div>
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col">
+              <ul class="list-inline text-center">
+                <li class="list-inline-item"><a href="#">À propos</a></li>
+                <li class="list-inline-item">&middot;</li>
+                <li class="list-inline-item"><a href="#">Contacte</a></li>
+                <li class="list-inline-item">&middot;</li>
+                <li class="list-inline-item"><a href="#">Conditions d'utilisations</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
     </div>
     <script type="text/javascript" src="/app.bundle.js"></script>
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
