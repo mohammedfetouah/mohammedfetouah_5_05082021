@@ -1,10 +1,56 @@
 body {
     background-color: #f3e9f1;
 }
-/* img.produit-image {
-    max-width: 200px;
+/*                    DEBUT HEADER                     */
+.jumbotron {
+    background: none;
+    margin-top: 20px;
 }
-img.produit-image {
-    max-width: 200px;
-} */
+/*                    FIN  HEADER                     */
+
+
+
+
+
+
+
+
+/*              DEBUT CONTAINER PAGE INDEX              */
+.produitsOrinoco.col {
+    margin-top: 50px;
+}
+.produit.card {
+    border-radius: 40px;
+    box-shadow: 3px 2px 10px #e5e5e5;
+}
+div img.produit-image.card-img-top {
+    border-radius: 40px 40px 0px 0px;
+    object-fit: cover;
+    height: 235px;
+    width: 100%;
+}
+/*              FIN CONTAINER PAGE INDEX              */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*              DEBUT FOOTER          */
+div footer.container-fluid {
+    margin-top: 50px;
+}
+
+/*               FIN FOOTER           */
+
+
+
 
