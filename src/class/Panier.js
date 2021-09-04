@@ -41,7 +41,7 @@ export default class Panier {
     }
     getHtmlQuantity(productKey, qty) {
         var html = '<select name="quantite" id="' + productKey + '">';
-        for (var i = 1;i<=10;i++) {
+        for (var i = 0;i<=10;i++) {
             if (i == qty) {
                 html +=  '<option value="'+ i + '" selected>' + i + '</option>';
             } else {

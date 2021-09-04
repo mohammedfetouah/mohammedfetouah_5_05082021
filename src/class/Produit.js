@@ -14,7 +14,7 @@ export default class Produit {
                                 '<div>' +
                                     '<img class="produit-image card-img-top"' + ' src="'  + this.imageUrl + '" alt="nounours">' +                             
                                 '</div>' +
-                                    '<div class="produit-description card-body">' +
+                                '<div class="produit-description card-body">' +
                                     '<div class="produit-name">' +
                                         '<span>' + this.name + '</span>' +
                                     '</div>' +
@@ -32,8 +32,8 @@ export default class Produit {
             colorHtml += '<option value="' + color + '">' + color +'</option>';
         }
                  
-        return          '<div class="row">' +
-                            '<div class="col-sm-12">' +
+        return          '<div class="produitCard row">' +
+                            '<div class="col-sm-4">' +
                                 '<div class="produit card"> ' +
                                     '<div>' +
                                         '<img class="produit-image card-img-top" src="'  + this.imageUrl + '" alt="nounours">' +                             
@@ -43,13 +43,13 @@ export default class Produit {
                                             '<span>' + this.name + '</span>' +
                                         '</div>' +
                                         ' <div class="produit-price"> ' + 
-                                        '    <span> ' + this.description + '</span>' +
-                                        '</div>' +
-                                        ' <div class="produit-price"> ' + 
                                             ' <span> ' + this.price/100 + '€</span>' +
                                         '</div>' + 
-                                        '<select name="colors" id="addColors">' + colorHtml + '</select>' + 
                                     '</div>' +
+                                    ' <div class="produit-presentation"> ' + 
+                                    '    <span> ' + this.description + '</span>' +
+                                    '</div>' +
+                                    '<select name="colors" id="addColors">' + colorHtml + '</select>' + 
                                     '<button id="addPanier" class="btn btn-secondary">  ajouter au panier </button>' +
                                 '</div>' +
                             '</div>' +

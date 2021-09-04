@@ -5,7 +5,10 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-    <link rel="stylesheet" href="/styles.css">
+    <link rel="stylesheet" href="/styles.css"> 
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700&display=swap" rel="stylesheet">   
     <title>Document</title>
 </head>
 <body>
@@ -37,8 +40,8 @@
             </div>
         </header>
         <main class="row">
-            <fieldset class="col-12">
-                <legend>Votre panier</legend>
+            <fieldset class="col-12 col-md-10 col-lg-8">
+                <legend>Mon panier</legend>
                 <div class="produits">
                     <div id="produits">
                     </div>
@@ -47,55 +50,57 @@
                     <div id="total">      
                     </div>
                 </div>
-                <button id="clearPanier" class="btn btn-secondary">Vider le panier</button>
+                <div class="buttonPanier">
+                    <button id="clearPanier" class="btn btn-secondary">Vider le panier</button>
+                </div>
             </fieldset>
-            <form method="GET" id="cordonnees" class="col-12">
+            <form method="GET" id="cordonnees" class="col-12 col-md-10 col-lg-8">
                 <fieldset class="form-group">
                     <legend>Vos cordonnées</legend>
-                    <div class="nom">
+                    <div class="nom form-group">
                         <label for="nom">Nom</label>
-                        <input type="text" name="nom" required="true" />
+                        <input type="text"  class="form-control" name="nom" required="true" />
                     </div>
-                    <div class="prenom">
+                    <div class="prenom form-group">
                         <label for="prenom">Prénom</label>
-                        <input type="text" name="prenom"/>
+                        <input type="text"  class="form-control" name="prenom"/>
                     </div>
-                    <div class="email">
+                    <div class="email form-group">
                         <label for="email">e-mail </label>
-                        <input type="email" name="email"/>
+                        <input type="email"  class="form-control" name="email"/>
                     </div>
-                    <div class="postal">
+                    <div class="postal form-group">
                         <label for="postal">Code postal</label>
-                        <input type="text" name="postal" >
+                        <input type="text"  class="form-control" name="postal" >
                     </div>
-                    <div class="ville">
+                    <div class="ville form-group">
                         <label for="ville">Ville</label>
-                        <input type="text" name="ville" />
+                        <input type="text"  class="form-control" name="ville" />
                     </div>
-                    <div class="adresse">
+                    <div class="adresse form-group">
                         <label for="adresse">Adresse</label>
-                        <input type="text" name="adresse"/>
+                        <input type="text" class="form-control" name="adresse"/>
                     </div>
-                    <input type="submit" name="Passer la commande" id="confirmeCommande" class="btn btn-secondary" value="passer la commande" />
+                    <div class="buttonPanier">
+                        <input type="submit" name="Passer la commande" id="confirmeCommande" class="btn btn-secondary" value="passer la commande" />
+                    </div>
                 </fieldset>
             </form>
         </main>
     </div>
-    <div>
-        <div class="container-fluid">
-          <div class="row">
+    <footer class="container-fluid">
+        <div class="row">
             <div class="col">
-              <ul class="list-inline text-center">
+                <ul class="list-inline text-center">
                 <li class="list-inline-item"><a href="#">À propos</a></li>
                 <li class="list-inline-item">&middot;</li>
-                <li class="list-inline-item"><a href="#">Contacte</a></li>
+                <li class="list-inline-item"><a href="#">Contact</a></li>
                 <li class="list-inline-item">&middot;</li>
                 <li class="list-inline-item"><a href="#">Conditions d'utilisations</a></li>
-              </ul>
+                </ul>
             </div>
-          </div>
         </div>
-    </div>
+    </footer>
     <script type="text/javascript" src="/app.bundle.js"></script>
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>

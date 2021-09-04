@@ -9,7 +9,7 @@ if(window.location.pathname == '/') {
         if (res.ok) {
             return res.json();
         } else {
-            alert('orinoco momentanément indisponible :( a');
+            alert('orinoco momentanément indisponible :( ');
         }
     })
     .then(function(data) {
@@ -21,7 +21,7 @@ if(window.location.pathname == '/') {
     })
     .catch(function(err) {
         console.log(err);
-        alert('orinoco momentanément indisponible :( b');
+        alert('orinoco momentanément indisponible :(' );
     });
 }
 //                   FIN PAGE INDEX                      // 
@@ -76,17 +76,17 @@ if(window.location.pathname == "/panier.html") {
     document.getElementById('total').innerHTML = '<div><b>Total:</b>' +  panier.getTotal()/100  + '€</div>' ;
     var produits = document.getElementById('produits');
     for (let [key, value] of Object.entries(panier.getProduits())) { 
-        produits.innerHTML +=           '<div class="produit">' +
-                                            '<div class="produitName">' +
-                                                '<span>' + value.name + '(' + value.color + ')</span>' + 
-                                            '</div>' +
-                                            '<div class="produitQuantity">' +
-                                                panier.getHtmlQuantity(key,value.qty) +
-                                            '</div>' +
-                                            '<div class="produitPrice">' +
-                                                '<span>' + value.price/100 + '€</span>' +
-                                            '</div>' +
-                                        '</div>';                                    
+        produits.innerHTML +=           '<div class="produitName">' +
+                                            '<span>' + value.name + '(' + value.color + ')</span>' + 
+                                        '</div>' +
+                                        '<div class="produitPrice">' +
+                                            '<span>' + value.price/100 + '€</span>' +
+                                        '</div>' +
+                                        '<div class="produitQuantity">' +
+                                        panier.getHtmlQuantity(key,value.qty) +
+                                    '</div>';
+                                            
+                                                                           
     }
     for (let [key, value] of Object.entries(panier.getProduits())) {   
         document.getElementById(key).addEventListener('change', function (event) {
@@ -96,7 +96,12 @@ if(window.location.pathname == "/panier.html") {
     }
     document.getElementById('cordonnees').addEventListener('submit', function(event) {
         event.preventDefault();
-        commande.addCommande();
+        if (panier.getTotal()/100 == 0) {
+            alert('votre panier est vide :(')
+        } else {
+            commande.addCommande();
+        }
+        
     })
 }
 //                  FIN PAGE PANIER                    // 

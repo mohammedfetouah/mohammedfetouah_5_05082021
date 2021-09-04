@@ -1,10 +1,37 @@
 body {
     background-color: #f3e9f1;
+    font-family: 'Roboto', sans-serif;
+
 }
+h1 {
+    text-align: center;
+}
+a {
+    color: black;
+}
+a:hover {
+    color: rgb(58, 58, 58);
+}
+.row {
+    font-size: 20px;
+}
+
+
+
+
+
 /*                    DEBUT HEADER                     */
+
+.navbar-brand {
+    font-size: 20px !important;
+}
 .jumbotron {
     background: none;
     margin-top: 20px;
+    margin-bottom: 0;
+}
+h1 {
+    margin-bottom: 0;
 }
 /*                    FIN  HEADER                     */
 
@@ -16,7 +43,7 @@ body {
 
 
 /*              DEBUT CONTAINER PAGE INDEX              */
-.produitsOrinoco.col {
+.produitsOrinoco.col-lg-4 {
     margin-top: 50px;
 }
 .produit.card {
@@ -29,10 +56,72 @@ div img.produit-image.card-img-top {
     height: 235px;
     width: 100%;
 }
+.produit-description.card-body {
+    font-weight: bold;
+    display: flex;
+    justify-content: space-between;
+    font-size: 23px;
+}
+.produitsOrinoco.col-lg-4 a:hover {
+    text-decoration: none !important;
+}
 /*              FIN CONTAINER PAGE INDEX              */
 
 
 
+
+/*              DEBUT CONTAINER PAGE PRODUIT              */
+.produitCard.row {
+    justify-content: center;
+    margin-top: 50px;
+}
+.produit-presentation {
+    text-align: CENTER;
+}
+select#addColors {
+    width: 30%;
+    margin: 20px auto 0;
+}
+button#addPanier {
+    margin-top: 50px;
+}
+/*              FIN CONTAINER PAGE PRODUIT               */
+
+
+
+
+
+
+/*              DEBUT CONTAINER PAGE PANIER              */
+legend {
+    margin-bottom: 0;
+}
+div#produits {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+div#total {
+    margin-top: 20px;
+}
+fieldset.col-12.col-md-10.col-lg-8 {
+    margin: 0 auto;
+}
+form#cordonnees {
+    margin: 0 auto;
+}
+.buttonPanier {
+    text-align: center;
+    margin-top: 30px;
+}
+fieldset.form-group {
+    margin-top: 50px;
+}
+legend {
+    font-weight: bold;
+    font-size: 28px;
+}
+/*              FIN CONTAINER PAGE PANIER               */
 
 
 
@@ -45,7 +134,7 @@ div img.produit-image.card-img-top {
 
 
 /*              DEBUT FOOTER          */
-div footer.container-fluid {
+footer.container-fluid {
     margin-top: 50px;
 }
 
