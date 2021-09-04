@@ -76,14 +76,18 @@ if(window.location.pathname == "/panier.html") {
     document.getElementById('total').innerHTML = '<div><b>Total:</b>' +  panier.getTotal()/100  + '€</div>' ;
     var produits = document.getElementById('produits');
     for (let [key, value] of Object.entries(panier.getProduits())) { 
-        produits.innerHTML +=           '<div class="produitName">' +
+        produits.innerHTML +=       '<div class="panierProduit">' +         
+                                        '<div class="produitName">' +
                                             '<span>' + value.name + '(' + value.color + ')</span>' + 
                                         '</div>' +
-                                        '<div class="produitPrice">' +
-                                            '<span>' + value.price/100 + '€</span>' +
-                                        '</div>' +
-                                        '<div class="produitQuantity">' +
-                                        panier.getHtmlQuantity(key,value.qty) +
+                                        '<div class="panierProduitPriceQty">' +
+                                            '<div class="produitPrice">' +
+                                                '<span>' + value.price/100 + '€</span>' +
+                                            '</div>' +
+                                            '<div class="produitQuantity">' +
+                                                panier.getHtmlQuantity(key,value.qty) +
+                                            '</div>'+
+                                        '</div>'+
                                     '</div>';
                                             
                                                                            
@@ -91,7 +95,7 @@ if(window.location.pathname == "/panier.html") {
     for (let [key, value] of Object.entries(panier.getProduits())) {   
         document.getElementById(key).addEventListener('change', function (event) {
             panier.setProductQty(key, document.getElementById(key).value);
-            document.getElementById('total').innerHTML = '<div><b>Total:</b>' +  panier.getTotal()/100  + '€</div>' ;        
+            document.getElementById('total').innerHTML = '<div><b>Total:</b>  ' +  panier.getTotal()/100  + '€</div>' ;        
         });
     }
     document.getElementById('cordonnees').addEventListener('submit', function(event) {
@@ -126,15 +130,12 @@ if(window.location.pathname == "/commande.html") {
         produitHtmlQty = value.qty
         console.log(produitHtmlQty)
     }
-    currentDiv.innerHTML +=     '<h2>'+
-                                    'nous vous remerciant pour votre commande'+
-                                '</h2>'+
-                                '<div class="commande">'+
-                                    '<h3>'+
-                                        'Détaille de la commande'+
-                                    '</h3>'+
-                                    '<div class="detailleCommande">'+
-                                        '<div class="detailleNumeroCommande">'+
+    currentDiv.innerHTML +=     '<div class="commande">'+
+                                    '<h2>'+
+                                        'Détail de la commande'+
+                                    '</h2>'+
+                                    '<div class="detailsCommande commandeP">'+
+                                        '<div class="detailCommande commandeNumero">'+
                                             '<p>'+
                                                 'N° de commande :'+
                                             '</p>'+
@@ -142,7 +143,7 @@ if(window.location.pathname == "/commande.html") {
                                                 commande.getCommande().orderId +
                                             '</p>' +
                                         '</div>' +
-                                        '<div class="detailleTotalCommande">' +
+                                        '<div class="detailCommande  commandeTotal">' +
                                             '<p>' +
                                                 'Total de la commande :' +
                                             '</p>' +
@@ -153,12 +154,12 @@ if(window.location.pathname == "/commande.html") {
                                     '</div>' +
                                 '</div>' +
                                 '<div class="commande">' +
-                                    '<h3>' +
+                                    '<h2>' +
                                         'Adresse de livraison' +
-                                    '</h3>' +
+                                    '</h2>' +
                                     '<div class="adresseCommande">' +
                                         '<div class="commandeNom">' +
-                                            '<p>' +
+                                            '<p class="commandeP">' +
                                                 'Nom :' +
                                             '</p>' +
                                             '<p>' +
@@ -166,7 +167,7 @@ if(window.location.pathname == "/commande.html") {
                                             '</p>' +
                                         '</div>' +
                                         '<div class="commandePrenom">' +
-                                            '<p>' +
+                                            '<p class="commandeP">' +
                                                 'Prénom :' +
                                             '</p>' +
                                             '<p>' +
@@ -174,7 +175,7 @@ if(window.location.pathname == "/commande.html") {
                                             '</p>' +
                                         '</div>' +
                                         '<div class="commandeAdresse">' +
-                                            '<p>' +
+                                            '<p class="commandeP">' +
                                                 'Adresse :' +
                                             '</p>' +
                                             '<p>' +
@@ -182,7 +183,7 @@ if(window.location.pathname == "/commande.html") {
                                             '</p>' +
                                         '</div>' +
                                         '<div class="commandeVille">' +
-                                            '<p>' +
+                                            '<p class="commandeP">' +
                                                 'Ville :' +
                                             '</p>' +
                                             '<p>' +

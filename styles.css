@@ -70,6 +70,9 @@ div img.produit-image.card-img-top {
 
 
 
+
+
+
 /*              DEBUT CONTAINER PAGE PRODUIT              */
 .produitCard.row {
     justify-content: center;
@@ -92,14 +95,28 @@ button#addPanier {
 
 
 
+
+
+
 /*              DEBUT CONTAINER PAGE PANIER              */
 legend {
     margin-bottom: 0;
 }
+
 div#produits {
     display: flex;
-    justify-content: space-between;
     margin-top: 20px;
+    flex-direction: column;
+}
+.panierProduit {
+    display: flex;
+    justify-content: space-between;
+}
+.panierProduitPriceQty {
+    display: flex;
+}
+.produitQuantity {
+    margin-left: 30px;
 }
 div#total {
     margin-top: 20px;
@@ -121,10 +138,43 @@ legend {
     font-weight: bold;
     font-size: 28px;
 }
+input#confirmeCommande {
+    text-transform: capitalize;
+}
 /*              FIN CONTAINER PAGE PANIER               */
 
 
 
+
+
+
+
+
+
+/*            DEBUT CONTAINER PAGE COMMANDE               */
+.detailsCommande {
+    margin-top: 6w0px;
+}
+.detailCommande.commandeTotal {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 40px;
+}
+main#commandes {
+    margin: 0 auto;
+}
+.commande {
+    margin-top: 50px;
+}
+.commande h2 {
+    text-align: center;
+    margin-bottom: 0;
+}
+.commandeP {
+    font-weight: bold;
+    margin-bottom: 0 !important;
+}
+/*              FIN CONTAINER PAGE COMMANDE              */
 
 
 
