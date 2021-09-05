@@ -54,6 +54,5 @@ export default class Produit {
                                 '</div>' +
                             '</div>' +
                         '</div>';
-
     }  
 }

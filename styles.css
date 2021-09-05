@@ -1,7 +1,6 @@
 body {
     background-color: #f3e9f1;
     font-family: 'Roboto', sans-serif;
-
 }
 h1 {
     text-align: center;
@@ -20,8 +19,12 @@ a:hover {
 
 
 
-/*                    DEBUT HEADER                     */
 
+
+
+
+
+/*                    DEBUT HEADER                     */
 .navbar-brand {
     font-size: 20px !important;
 }
@@ -34,6 +37,7 @@ h1 {
     margin-bottom: 0;
 }
 /*                    FIN  HEADER                     */
+
 
 
 
@@ -66,6 +70,8 @@ div img.produit-image.card-img-top {
     text-decoration: none !important;
 }
 /*              FIN CONTAINER PAGE INDEX              */
+
+
 
 
 
@@ -170,6 +176,12 @@ main#commandes {
     text-align: center;
     margin-bottom: 0;
 }
+.detailsCommande.commandeP {
+    margin-top: 40px;
+}
+.adresseCommande {
+    margin-top: 40px;
+}
 .commandeP {
     font-weight: bold;
     margin-bottom: 0 !important;
@@ -183,11 +195,11 @@ main#commandes {
 
 
 
+
 /*              DEBUT FOOTER          */
 footer.container-fluid {
     margin-top: 50px;
 }
-
 /*               FIN FOOTER           */
 
 

@@ -16,7 +16,6 @@ export default class Panier {
             color : productColor,
             price : productPrice,
         };
-        
         localStorage.setItem('panier', JSON.stringify(panierLocal));
     }
     setProductQty(productKey, qty) {

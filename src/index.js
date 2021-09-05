@@ -88,9 +88,7 @@ if(window.location.pathname == "/panier.html") {
                                                 panier.getHtmlQuantity(key,value.qty) +
                                             '</div>'+
                                         '</div>'+
-                                    '</div>';
-                                            
-                                                                           
+                                    '</div>';                                              
     }
     for (let [key, value] of Object.entries(panier.getProduits())) {   
         document.getElementById(key).addEventListener('change', function (event) {
