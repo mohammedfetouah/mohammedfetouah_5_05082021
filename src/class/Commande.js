@@ -35,7 +35,6 @@ export default class Commande {
            return;
        }
        var panier = new Panier();
-
        var products = [];
        for (let [key, value] of Object.entries(panier.getProduits()))  {
            products.push(key.split('_')[0]);

@@ -200,6 +200,9 @@ main#commandes {
 footer.container-fluid {
     margin-top: 50px;
 }
+footer.container-fluid a:hover {
+    text-decoration: none !important;
+}
 /*               FIN FOOTER           */
 
 
