@@ -4,7 +4,7 @@ import Commande from "./class/Commande";
 
 //                   DEBUT PAGE INDEX                      // 
 if(window.location.pathname == '/') {
-    fetch('http://localhost:3000/api/teddies')
+    fetch('http://localhost:3000/api/teddies') // recuperation des information peluche
     .then(function(res) {
         if (res.ok) {
             return res.json();
@@ -12,8 +12,8 @@ if(window.location.pathname == '/') {
             alert('orinoco momentanément indisponible :( ');
         }
     })
-    .then(function(data) {
-        for(let produitData of data) {
+    .then(function(data) { // promesse qui recupere des donnée. affiche les information dans le fichier html.
+        for(let produitData of data) { 
             var produit = new Produit(produitData._id, produitData.price, produitData.name, produitData.imageUrl, produitData.description, produitData.colors );
             var currentDiv = document.getElementById('container');
             currentDiv.innerHTML += produit.getHtml();
@@ -21,7 +21,7 @@ if(window.location.pathname == '/') {
     })
     .catch(function(err) {
         console.log(err);
-        alert('orinoco momentanément indisponible :(' );
+        alert('orinoco momentanément indisponible :(' ); // si erreur, message d'affigage erreur
     });
 }
 //                   FIN PAGE INDEX                      // 
@@ -31,11 +31,11 @@ if(window.location.pathname == '/') {
 
 
 //                   DEBUT PAGE PRODUIT                     // 
-if(window.location.pathname == "/produit.html") {
-    var str = window.location.href;
-    var url = new URL(str);
-    var productId = url.searchParams.get("id")
-    fetch('http://localhost:3000/api/teddies/' + productId)
+if(window.location.pathname == "/produit.html") { 
+    var str = window.location.href;              // je recupere d'Id
+    var url = new URL(str);                      //
+    var productId = url.searchParams.get("id")   //
+    fetch('http://localhost:3000/api/teddies/' + productId) // recuperation des information de la peluche 
     .then(function(res) {
         if (res.ok) {
             return res.json();
@@ -48,7 +48,7 @@ if(window.location.pathname == "/produit.html") {
         var currentDiv = document.getElementById('containerProduit');
         currentDiv.innerHTML += (produit.getHtmlProduit());
         var addPanier = document.getElementById('addPanier');
-        addPanier.addEventListener('click', function (e) {
+        addPanier.addEventListener('click', function (e) { // Je crée un evenement
             var color = document.getElementById('addColors').value;
             panier.addProduct(data._id,data.name, data.price, color);
         });
@@ -67,15 +67,15 @@ if(window.location.pathname == "/produit.html") {
 
 //                   DEBUT PAGE PANIER                    // 
 var panier = new Panier();
-if(window.location.pathname == "/panier.html") {
+if(window.location.pathname == "/panier.html") { 
     var clearPanier = document.getElementById('clearPanier');
-    clearPanier.addEventListener('click', function(){
+    clearPanier.addEventListener('click', function(){ // Je crée un evenement
         localStorage.clear();
         window.location.href = "http://localhost:8080/panier.html";
     });
     document.getElementById('total').innerHTML = '<div><b>Total:</b>' +  panier.getTotal()/100  + '€</div>' ;
     var produits = document.getElementById('produits');
-    for (let [key, value] of Object.entries(panier.getProduits())) { 
+    for (let [key, value] of Object.entries(panier.getProduits())) {  // object entries il prend en parametre un tableau d'objet est retourne 2 element clée valeur
         produits.innerHTML +=       '<div class="panierProduit">' +         
                                         '<div class="produitName">' +
                                             '<span>' + value.name + '(' + value.color + ')</span>' + 
@@ -91,12 +91,12 @@ if(window.location.pathname == "/panier.html") {
                                     '</div>';                                              
     }
     for (let [key, value] of Object.entries(panier.getProduits())) {   
-        document.getElementById(key).addEventListener('change', function (event) {
+        document.getElementById(key).addEventListener('change', function (event) { // Je crée un evenement
             panier.setProductQty(key, document.getElementById(key).value);
             document.getElementById('total').innerHTML = '<div><b>Total:</b>  ' +  panier.getTotal()/100  + '€</div>' ;        
         });
     }
-    document.getElementById('cordonnees').addEventListener('submit', function(event) {
+    document.getElementById('cordonnees').addEventListener('submit', function(event) { // Je crée un evenement
         event.preventDefault();
         if (panier.getTotal()/100 == 0) {
             alert('votre panier est vide :(')
@@ -122,7 +122,7 @@ if(window.location.pathname == "/commande.html") {
     var produitHtmlName ='';
     var produitHtmlPrice ='';
     var produitHtmlQty ='';
-    for (let [key, value] of Object.entries(commande.getCommande().panier)) {
+    for (let [key, value] of Object.entries(commande.getCommande().panier)) { // object entries il prend en parametre un tableau d'objet est retourne 2 element clée valeur
         produitHtmlName = value.name 
         produitHtmlPrice = value.price
         produitHtmlQty = value.qty

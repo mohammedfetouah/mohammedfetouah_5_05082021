@@ -17,6 +17,7 @@ export default class Panier {
             price : productPrice,
         };
         localStorage.setItem('panier', JSON.stringify(panierLocal));
+        alert('Le produit a bien été rajouté au panier.');
     }
     setProductQty(productKey, qty) {
         var panierLocal = localStorage.getItem('panier');
